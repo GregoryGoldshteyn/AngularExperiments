@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { DrawableHex } from './hex';
+import { EditHexService } from './edit-hex.service'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  appRoutes = [
+	{ path: 'home',		label: 'Home' },
+	{ path: 'resume',	label: 'Resume' },
+	{ path: 'hexmapper',	label: 'Hex Mapper' },
+	{ path: 'about',	label: 'About' }
+	];
 }
