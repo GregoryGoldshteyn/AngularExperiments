@@ -1,0 +1,8 @@
+<mat-list>
+	<h3 mat-subheader>List of Left Things</h3>
+	<mat-list-item *ngFor='let item of leftThings'>
+		<button mat-raised-button color='primary'>
+			{{item.label}}
+		</button>
+	</mat-list-item>
+</mat-list>

@@ -1,0 +1,32 @@
+{ 'FivePartDungeonElements':
+	{
+		'Guardians': [
+			'Blink Dog' : {
+				'Type' : 'Creature',
+				'Alignment' : ['LG'],
+				'CR': 0.25
+			},
+			'Hellhound' : {
+				'Type' : 'Creature',
+				'Alignment' : ['LE'],
+				'CR' : 3
+			}
+		],
+		'RPChallenges': [
+			{'Title' : 'Have you seen me?',
+			'Description' : 'A weeping Ogre/Giant sits with its hands covering its face. It's holding the collar of its beloved pet who has gone missing.',
+			'Elements' : ['Dangerous, sad, stupid creature', 'Lost pet'],
+			'Tactics' : ['Diplomacy', 'Stealth', 'Combat', 'Trickery'],
+			'Rewards' : ['Treasure', 'Secrets', 'Ally']},
+			{'Title' : 'Stone cold sober',
+			'Description' : 'A loud and insulting dwarf statue berates the party until they get him a drink',
+			'Elements' : ['Obnoxious statue', 'Booze'],
+			'Tactics' : ['Diplomacy', 'Combat'],
+			'Rewards' : ['Secrets', 'Treasure']},
+			{}
+		],
+		'Tricks': [],
+		'Puzzles': [],
+		'Finales': []
+	}
+}

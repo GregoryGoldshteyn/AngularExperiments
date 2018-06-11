@@ -1,0 +1,33 @@
+<!-- <mat-list>
+	<h3 mat-subheader>List of Right Things</h3>
+	<mat-list-item *ngFor='let item of rightThings'>
+		<button mat-raised-button color='warn'>
+			{{item.label}}
+		</button>
+	</mat-list-item>
+</mat-list> -->
+<mat-card>
+	<mat-card-title>
+		<h3>Hex Editor</h3>
+	</mat-card-title>
+	<div *ngIf="!editHex">
+	<mat-card-subtitle>
+		Select a hex to modify it
+	</mat-card-subtitle>
+	</div>
+	<div *ngIf="editHex">
+	<mat-card-content>
+		<h4>Hex At [{{editHex.gridX}}, {{editHex.gridY}}]</h4>
+		<form>
+		  <mat-form-field>
+			<mat-select [(value)]="editHex.type">
+				<mat-option *ngFor="let terrain of NumberToTerrain" value="{{terrain}}">{{terrain}}</mat-option>
+			</mat-select>
+		  </mat-form-field>
+		</form>
+		<button mat-raised-button (click)="saveHex()">
+			Save
+		  </button>
+	</mat-card-content>
+	</div>
+</mat-card>

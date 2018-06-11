@@ -1,0 +1,10 @@
+<mat-toolbar>
+	<span>Hex Roller</span>
+	<button mat-raised-button (click)="sprinkleTile(editHex.type, 5)">Sprinkle</button>
+	<button mat-raised-button (click)="randomExpand(editHex)">RandomExpand</button>
+	<button mat-raised-button (click)="zoomOnSquare()">Zoom on square</button>
+	<button mat-raised-button (click)="downloadCSVAtlas()">Download CSV</button>
+</mat-toolbar>
+<div id="drawingContainer">
+	<div id="hexMapDrawing"></div>
+</div>
