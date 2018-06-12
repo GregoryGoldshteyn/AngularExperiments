@@ -16,6 +16,7 @@ export class HexMapperComponent implements OnInit {
 	col: AtlasHex[]
 	editHex: DrawableHex;
 	subscription: Subscription;
+	draw;
 
   constructor(private editHexService: EditHexService){
 	  this.editHexService = editHexService;
@@ -42,10 +43,10 @@ export class HexMapperComponent implements OnInit {
 	}
   
   ngOnInit() {
-	var draw = SVG('hexMapDrawing').size('100%', '100%');
+	this.draw = SVG('hexMapDrawing').size('100%', '100%');
 		for(var i = 0; i < 31; i += 1){
 			for(var j = 0; j < 26; j += 1){
-				this.atlas[i][j].drawHex(draw);
+				this.atlas[i][j].drawHex(this.draw);
 				this.atlas[i][j].setOnClickListener(this.printCoords, this);
 				this.atlas[i][j].generateSubHexes();
 				this.atlas[i][j].fillNeighborHexes();
@@ -61,18 +62,18 @@ export class HexMapperComponent implements OnInit {
 				this.atlas[i][j].neighbors[4] = i % 2 == 1 ? (i > 0 ? this.atlas[i - 1][j] : null) : (i > 0 && j < 26 ? this.atlas[i - 1][j + 1] : null);
 				this.atlas[i][j].neighbors[5] = i % 2 == 0 ? (i > 0 ? this.atlas[i - 1][j] : null) : (i > 0 && j > 0 ? this.atlas[i - 1][j - 1] : null);
 				
-				this.atlas[i][j].neighborHexes[3][0] = this.atlas[i][j].neighbors[3] ? this.atlas[i][j].neighbors[3].neighborHexes[0][1] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, -1, -1, this.atlas[i][j].rollForNeighbor());
-				this.atlas[i][j].neighborHexes[3][1] = this.atlas[i][j].neighbors[3] ? this.atlas[i][j].neighbors[3].neighborHexes[0][0] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, -1, -1, this.atlas[i][j].rollForNeighbor());
-				this.atlas[i][j].neighborHexes[4][0] = this.atlas[i][j].neighbors[4] ? this.atlas[i][j].neighbors[4].neighborHexes[1][1] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, -1, -1, this.atlas[i][j].rollForNeighbor());
-				this.atlas[i][j].neighborHexes[4][1] = this.atlas[i][j].neighbors[4] ? this.atlas[i][j].neighbors[4].neighborHexes[1][0] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, -1, -1, this.atlas[i][j].rollForNeighbor());
-				this.atlas[i][j].neighborHexes[5][0] = this.atlas[i][j].neighbors[5] ? this.atlas[i][j].neighbors[5].neighborHexes[2][1] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, -1, -1, this.atlas[i][j].rollForNeighbor());
-				this.atlas[i][j].neighborHexes[5][1] = this.atlas[i][j].neighbors[5] ? this.atlas[i][j].neighbors[5].neighborHexes[2][0] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, -1, -1, this.atlas[i][j].rollForNeighbor());
+				this.atlas[i][j].neighborHexes[3][0] = this.atlas[i][j].neighbors[3] ? this.atlas[i][j].neighbors[3].neighborHexes[0][1] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, 4, 4, this.atlas[i][j].rollForNeighbor());
+				this.atlas[i][j].neighborHexes[3][1] = this.atlas[i][j].neighbors[3] ? this.atlas[i][j].neighbors[3].neighborHexes[0][0] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, 2, 4, this.atlas[i][j].rollForNeighbor());
+				this.atlas[i][j].neighborHexes[4][0] = this.atlas[i][j].neighbors[4] ? this.atlas[i][j].neighbors[4].neighborHexes[1][1] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, 1, 4, this.atlas[i][j].rollForNeighbor());
+				this.atlas[i][j].neighborHexes[4][1] = this.atlas[i][j].neighbors[4] ? this.atlas[i][j].neighbors[4].neighborHexes[1][0] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, 0, 2, this.atlas[i][j].rollForNeighbor());
+				this.atlas[i][j].neighborHexes[5][0] = this.atlas[i][j].neighbors[5] ? this.atlas[i][j].neighbors[5].neighborHexes[2][1] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, 0, 1, this.atlas[i][j].rollForNeighbor());
+				this.atlas[i][j].neighborHexes[5][1] = this.atlas[i][j].neighbors[5] ? this.atlas[i][j].neighbors[5].neighborHexes[2][0] : new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, 1, 0, this.atlas[i][j].rollForNeighbor());
 				//*/
 			}
 		}
 		for(var i = 0; i < 5; i += 1){
 			for(var j = 0; j < 5; j += 1){
-				draw.rect(HexVals.HEX_WIDTH * 6 + HexVals.HEX_DEPTH * 6, HexVals.HEX_HEIGHT * 10).attr({'fill': 'none', 'fill-opacity' : 0.0, 'pointer-events' : 'visiblePainted'}).stroke({'width': 1}).move(HexVals.HEX_WIDTH/2 + HexVals.HEX_DEPTH + (HexVals.HEX_WIDTH * 6 * i + HexVals.HEX_DEPTH * 6 * i), HexVals.HEX_HEIGHT + HexVals.HEX_HEIGHT * 10 * j);
+				this.draw.rect(HexVals.HEX_WIDTH * 6 + HexVals.HEX_DEPTH * 6, HexVals.HEX_HEIGHT * 10).attr({'fill': 'none', 'fill-opacity' : 0.0, 'pointer-events' : 'visiblePainted'}).stroke({'width': 1}).move(HexVals.HEX_WIDTH/2 + HexVals.HEX_DEPTH + (HexVals.HEX_WIDTH * 6 * i + HexVals.HEX_DEPTH * 6 * i), HexVals.HEX_HEIGHT + HexVals.HEX_HEIGHT * 10 * j);
 			}
 		}
 		
@@ -100,7 +101,6 @@ export class HexMapperComponent implements OnInit {
 		}
 	}
 	simpleExpand(hex){
-		console.log(hex);
 		for(var i = 0; i < hex.neighbors.length; i += 1){
 			if(hex.neighbors[i] != null){
 				hex.neighbors[i].type = hex.type;
@@ -109,7 +109,6 @@ export class HexMapperComponent implements OnInit {
 		}
 	}
 	randomExpand(hex){
-		console.log(hex);
 		for(var i = 0; i < hex.neighbors.length; i += 1){
 			if(hex.neighbors[i] != null){
 				hex.neighbors[i].type = hex.rollForNeighbor();
@@ -136,7 +135,21 @@ export class HexMapperComponent implements OnInit {
 				this.atlas[i][j].polygon.move((HexVals.HEX_DEPTH + HexVals.HEX_WIDTH) * -2, HexVals.HEX_HEIGHT * -2);
 			}
 		}
-		
+		for(var i = 0; i < 7; i += 1){
+			for(var j = 0; j < 6; j += 1){
+				for(var col = 0; col < 5; col += 1){
+					for(var row = 0; row < this.atlas[i][j].hexes[col].length; row += 1){
+						console.log(this.atlas[i][j].hexes[col][row])
+						this.atlas[i][j].hexes[col][row].svgX = 
+							(HexVals.HEX_DEPTH + HexVals.HEX_WIDTH/2) + 
+							(HexVals.HEX_DEPTH + HexVals.HEX_WIDTH) * (this.atlas[i][j].hexes[col][row].gridX - 4);
+							
+						this.atlas[i][j].hexes[col][row].svgY = this.atlas[i][j].hexes[col][row].gridX % 2 == 1 ? (HexVals.HEX_HEIGHT * 2 * this.atlas[i][j].hexes[col][row].gridY) : (HexVals.HEX_HEIGHT + HexVals.HEX_HEIGHT * 2 * this.atlas[i][j].hexes[col][row].gridY);
+						this.atlas[i][j].hexes[col][row].drawHex(this.draw);
+					}
+				}
+			}
+		}
 	}
 	
 }

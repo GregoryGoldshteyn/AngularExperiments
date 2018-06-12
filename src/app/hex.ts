@@ -202,10 +202,11 @@ export class AtlasHex extends SuperHex {
 			for(var j = 0; j < this.hexes[i].length; j += 1){
 				this.hexes[i][j] = new RegionHex(
 					(HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, 
-					HexVals.HEX_HEIGHT * -2, 1 + i, i == 0 || i == 4 ? j + 1 : j, this.rollForNeighbor());
+					HexVals.HEX_HEIGHT * -2,
+					this.gridX * 5 + 1 + i,
+					i == 0 || i == 4 ? (this.gridX % 2 == 0 ? j + 1 + this.gridY * 5 : j - 2 + this.gridY * 5): (this.gridX % 2 == 0 ? j + this.gridY * 5 : j - 3 + this.gridY * 5), this.rollForNeighbor());
 			}
 		}
-		console.log(this.hexes);
 	}
 	fillNeighborHexes(){
 		this.neighborHexes[0][0] = new RegionHex((HexVals.HEX_WIDTH + HexVals.HEX_DEPTH) * -2, HexVals.HEX_HEIGHT * -2, 2, -1, this.rollForNeighbor());
